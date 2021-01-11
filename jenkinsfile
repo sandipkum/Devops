@@ -1,0 +1,26 @@
+pipeline{
+ agent any
+ parameters{
+  string defaultValue: 'Sandeep', description: 'Who are you', name: 'Person', trim: false
+  text defaultValue: '', description: 'Say something about you', name: 'Biography'
+  booleanParam defaultValue: true, description: 'toggle this', name: 'TOGGLE'
+  choice choices: ['', 'one', 'two', 'three'], description: 'Choose your option', name: 'Pick'
+  password defaultValue: 'hello', description: 'enter your password', name: 'Password'
+ }
+ stages{
+      stage('Example'){
+          steps{
+              echo "Hello ${params.Person}"
+              
+              }
+      }
+      stage("GIT CLONE"){
+		  agent{label "Demo"}
+		  steps{
+              sh "sudo yum install git -y"
+              sh "git clone https://github.com/kishancs2020/TicketBookingServiceJunitTesting.git"
+           }
+		  }
+      
+   } 
+}
